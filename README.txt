@@ -5,9 +5,11 @@ Date:
  2014年10月9日
 
 Description: 
- 本项目为 “一天不敲代码就浑身不舒坦” 项目的分支。
-使用phaser作为html5游戏的开发框架，phaser是使用PIXI.js渲染器的一个开源的html5游戏框架，有着快速、移动端友好的特点，支持Canvas和WebGL两种渲染方式，并对上层隐藏细节。
-可随意下载修改...
+ 本项目为 “一天不敲代码就浑身不舒坦” 项目的分支，主要为html5游戏。可随意下载修改...
+phaser作为html5游戏的开发框架，它使用PIXI.js渲染器的一个开源的html5游戏框架，有着快速、移动端友好的特点，支持Canvas和WebGL两种渲染方式，并对上层隐藏细节。
+
+phaser项目地址：
+ https://github.com/photonstorm/phaser
 
            *             ,
                        _/^\_

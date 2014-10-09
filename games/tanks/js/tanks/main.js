@@ -203,16 +203,6 @@ var main_state = {
 			left: game.input.keyboard.addKey(Phaser.Keyboard.A),
 		}
 		
-//		var down_key = this.game.input.keyboard.addKey(Phaser.Keyboard.S);
-//		down_key.onDown.add(function(){
-//			console.log('a');
-//			game.add.tween(tank).to({angle: 90}, 500, Phaser.Easing.Linear.None, true);
-//			currentSpeed = 300;
-//		}, this);
-//		down_key.onUp.add(function(){
-//			console.log('b');
-//		}, this);
-		
 	},
 	render: function(){
 		game.debug.text('Enemies: ' + enemiesAlive + ' / ' + enemiesTotal, 32, 32);
@@ -227,6 +217,10 @@ var main_state = {
 				game.physics.arcade.collide(tank, enemies[i].tank);
 				game.physics.arcade.overlap(bullets, enemies[i].tank, bulletHitEnemy, null, this);
 				enemies[i].update();
+				
+				for(var j = i + 1; j < enemies.length; j++){
+					game.physics.arcade.collide(enemies[i].tank, enemies[j].tank);
+				}
 			}
 		}
 		
@@ -263,14 +257,6 @@ var main_state = {
 	    }
 	    
 	    if(inputed){
-	    	
-//	    	var included = ANGLE - angle;
-//	    	var offset = 0;
-//	    	if(Math.abs(included) > 180){
-//	    		offset = 4;
-//	    	}else{
-//	    		offset = -4;
-//	    	}
 	    	
 	    	var MIN = 8;
 			var result = checkAngle(angle, ANGLE);
