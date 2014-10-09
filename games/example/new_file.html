@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Example - Playing With Points</title>
+		
+		<script src="../../build/phaser.min.js"></script>
+		
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">     
+		<meta content="yes" name="apple-mobile-web-app-capable">     
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">     
+		<meta content="telephone=no" name="format-detection">
+	</head>
+	<body>
+		<div id="phaser-example">
+			
+		</div>
+		<script>
+			var game = new Phaser.Game(360, 600, Phaser.CANVAS, 'phaser-exmple', {create: create, update: update, render: render});
+			var p1, p2, p3 ,p4;
+			
+			var d2 = 0;
+			var d3 = 0;
+			var d4 = 0;
+			
+			var cnt = 0;
+			var g = null;
+			
+			var ps = [];
+			var psg = null;
+			var inx = 0;
+			
+			function create(){
+				p1 = new Phaser.Point(game.world.centerX, game.world.centerY);
+				p2 = new Phaser.Point(p1.x - 25, p1.y - 25);
+				p3 = new Phaser.Point(p2.x - 25, p2.y - 25);
+				p4 = new Phaser.Point(p3.x - 25, p3.y - 25);
+				
+				g = game.add.graphics(0, 0);
+				g.beginFill(0xFF3300);
+    			g.lineStyle(1, 0xffd900, 1);
+    			psg = game.add.group();
+    			
+    			for(var i = 0; i < 100; i++)
+    				ps.push(new Phaser.Point(0, 0));
+			}
+			function update(){
+				p2.rotate(p1.x, p1.y, game.math.wrapAngle(d2), true, 75);
+				d2 += 2;
+				
+				p3.rotate(p2.x, p2.y, game.math.wrapAngle(d3), true, 25);
+				d3 += 4;
+				
+				p4.rotate(p3.x, p3.y, game.math.wrapAngle(d4), true, 50);
+				d4 += 7;
+				var offsetInx = inx++ % ps.length;
+				ps[offsetInx].set(p4.x, p4.y);
+				
+				//g.drawRect(ps[offsetInx % ps.length].x, ps[offsetInx % ps.length].y, 4, 4);
+				
+				
+				
+			}
+			function render(){
+				game.context.strokeStyle = 'rgb(0, 255, 255)';
+				game.context.beginPath();
+				game.context.moveTo(p1.x, p1.y);
+				game.context.lineTo(p2.x, p2.y);
+				game.context.lineTo(p3.x, p3.y);
+				game.context.lineTo(p4.x, p4.y);
+				game.context.stroke();
+				game.context.closePath();
+				
+				game.context.fillStyle = 'rgb(255, 255, 0)';
+				game.context.fillRect(p1.x, p1.y, 4, 4);
+				
+				game.context.fillStyle = 'rgb(255, 0, 0)';
+				game.context.fillRect(p2.x, p2.y, 4, 4);
+				
+				game.context.fillStyle = 'rgb(0, 255, 0)';
+				game.context.fillRect(p3.x, p3.y, 4, 4);
+				
+				game.context.fillStyle = 'rgb(255, 0, 255)';
+				game.context.fillRect(p4.x, p4.y, 4, 4);
+				
+				cnt += 4;
+				for(var i = 0; i < ps.length; i++){
+					var p = ps[i];
+					if(p.x !== 0 && p.y !== 0){
+						game.context.fillStyle = 'hsla(' + ((360 / ps.length) * i % 360) + ', 50%, 50%, 1)';
+						game.context.fillRect(p.x, p.y, 4, 4);
+					}
+				}
+				
+//				game.context.fillRect(cnt, cnt, 4, 4);
+				
+				
+			}
+		</script>
+	</body>
+</html>

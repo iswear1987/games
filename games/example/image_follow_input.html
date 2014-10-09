@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>04 - image follow input - Example</title>
+		<script src="../../build/phaser.min.js"></script>
+	</head>
+	<body>
+		<div id="example"></div>
+		<script>
+			var game = new Phaser.Game(800, 600, Phaser.AUTO, 'example', {preload: preload, create: create, update: update});
+			function preload(){
+				game.load.image('icon', 'assets/star.png');
+			}
+			function create(){
+				this.icon = game.add.sprite(game.world.centerX, game.world.centerY, 'icon');
+				this.icon.anchor.set(0.5);
+				
+				game.physics.arcade.enable(this.icon);
+			}
+			function update(){
+				if(game.physics.arcade.distanceToPointer(this.icon, game.input.activePointer) > 8){
+					game.physics.arcade.moveToPointer(this.icon, 300);
+				}else{
+					this.icon.body.velocity.set(0);
+				}
+				
+				game.debug.inputInfo(32, 32);
+			}
+		</script>
+	</body>
+</html>
